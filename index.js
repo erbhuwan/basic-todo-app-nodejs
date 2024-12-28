@@ -4,9 +4,13 @@ import mongoose from "mongoose";
 import UserRoutes from "./routes/userRoutes.js";
 import TodoRoutes from "./routes/todoRoutes.js";
 
+dotenv.config();
+
 const app = express();
 
-dotenv.config();
+app.set("view engine", "ejs");
+
+app.use(express.static("public"));
 
 app.use(express.json());
 
@@ -14,6 +18,10 @@ app.get("/", (req, res) => {
   return res.status(200).json({
     message: "Server is running.",
   });
+});
+
+app.get("/view-profile", (req, res) => {
+  return res.render("user", { user: "Bhuwan" });
 });
 
 // user routes
